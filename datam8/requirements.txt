@@ -1,0 +1,9 @@
+pandas==2.0.3
+sqlitedict
+tqdm==4.66.1
+rich==13.4.2
+transformers
+torch==2.4.1+cpu
+torchvision
+torchaudio
+PyYAML

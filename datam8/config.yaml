@@ -1,0 +1,121 @@
+# General Configuration
+cache_enabled: true
+config:
+  cache_enabled: true
+  max_threads: 4
+  output_path: datasets
+
+# LLM Configuration
+llm:
+  model_name: 'distilgpt2'  # Specify the LLM model to use (e.g., 'gpt2', 'distilgpt2', 'EleutherAI/gpt-neo-125M')
+  pad_token: '<PAD>'   # Define a unique pad token
+  generation_params:
+    max_length: 50
+    temperature: 0.7
+    num_return_sequences: 1
+    no_repeat_ngram_size: 2
+  auto_num_samples: 10         # Number of samples to generate in Auto Mode
+  auto_format: 'json'          # Output format in Auto Mode ('json', 'csv', 'parquet')
+  auto_file_name: 'auto_user_profiles'  # File name in Auto Mode
+
+# Dataset Generation Templates
+templates:
+  book_catalog:
+    - book_id: random.randint(10000, 99999)
+    - title: 'self.generate_text("Book Title: ", max_length=10)'
+    - author: 'self.generate_text("Author Name: ", max_length=15)'
+    - genre: random.choice(['Fiction', 'Non-fiction', 'Mystery', 'Science Fiction', 'Romance', 'Biography'])
+    - publication_year: random.randint(1900, 2023)
+    - price: round(random.uniform(5.0, 50.0), 2)
+    - isbn: 'f"ISBN-{random.randint(1000000000, 9999999999)}"'
+
+  customer_feedback:
+    - feedback_id: random.randint(1000, 9999)
+    - user_id: random.randint(1000, 9999)
+    - product_id: random.randint(10000, 99999)
+    - rating: random.randint(1, 5)
+    - comment: 'self.generate_text("Customer feedback: ", max_length=50)'
+    - submitted_at: datetime.now().isoformat()
+
+  employee_record:
+    - employee_id: random.randint(1000, 9999)
+    - name: 'self.generate_text("Employee Name: ", max_length=20)'
+    - department: random.choice(['HR', 'IT', 'Finance', 'Marketing', 'Sales', 'Operations'])
+    - position: random.choice(['Manager', 'Associate', 'Director', 'Intern', 'Specialist'])
+    - salary: round(random.uniform(30000, 150000), 2)
+    - hire_date: 'f"{random.randint(2000, 2023)}-{random.randint(1, 12):02d}-{random.randint(1, 28):02d}"'
+
+  fitness_tracking:
+    - session_id: random.randint(1000, 9999)
+    - user_id: random.randint(1000, 9999)
+    - activity_type: random.choice(['Running', 'Cycling', 'Swimming', 'Yoga', 'Strength Training'])
+    - duration_minutes: random.randint(10, 120)
+    - calories_burned: random.randint(50, 1000)
+    - heart_rate_avg: random.randint(60, 180)
+    - session_date: datetime.now().isoformat()
+
+  inventory_log:
+    - log_id: random.randint(1000, 9999)
+    - product_id: random.randint(10000, 99999)
+    - quantity_change: random.randint(-100, 100)
+    - reason: random.choice(['restock', 'sale', 'return', 'damaged'])
+    - timestamp: datetime.now().isoformat()
+
+  order_details:
+    - order_id: random.randint(100000, 999999)
+    - user_id: random.randint(1000, 9999)
+    - total_amount: round(random.uniform(10.0, 1000.0), 2)
+    - status: random.choice(['pending', 'processing', 'shipped', 'delivered', 'cancelled'])
+    - items: '[random.randint(10000, 99999) for _ in range(random.randint(1, 5))]'
+    - order_date: datetime.now().isoformat()
+
+  product_catalog:
+    - product_id: random.randint(10000, 99999)
+    - name: 'self.generate_text("Product Name: ", max_length=10)'
+    - category: random.choice(['Electronics', 'Clothing', 'Books', 'Home'])
+    - description: 'self.generate_text("Product Description: ", max_length=50)'
+    - price: round(random.uniform(10.0, 500.0), 2)
+    - in_stock: random.choice([True, False])
+    - created_at: datetime.now().isoformat()
+
+  restaurant_menu:
+    - item_id: random.randint(100, 999)
+    - name: 'self.generate_text("Menu Item: ", max_length=15)'
+    - category: random.choice(['Appetizer', 'Main Course', 'Dessert', 'Beverage'])
+    - price: round(random.uniform(5.0, 50.0), 2)
+    - is_vegetarian: random.choice([True, False])
+    - calories: random.randint(100, 2000)
+
+  social_media_post:
+    - post_id: random.randint(100000, 999999)
+    - user_id: random.randint(1000, 9999)
+    - content: 'self.generate_text("Social Media Post: ", max_length=280)'
+    - likes: random.randint(0, 10000)
+    - comments: random.randint(0, 1000)
+    - shares: random.randint(0, 500)
+    - created_at: datetime.now().isoformat()
+
+  transaction_log:
+    - transaction_id: random.randint(100000, 999999)
+    - amount: round(random.uniform(1.0, 10000.0), 2)
+    - currency: random.choice(['USD', 'EUR', 'GBP'])
+    - transaction_type: random.choice(['debit', 'credit', 'transfer'])
+    - timestamp: datetime.now().isoformat()
+
+  user_profile:
+    - user_id: random.randint(1000, 9999)
+    - name: 'self.generate_text("User Name: ", max_length=15)'
+    - age: random.randint(18, 70)
+    - email: 'f"user{random.randint(100, 999)}@example.com"'
+    - bio: 'self.generate_text("User Bio: ", max_length=100)'
+    - created_at: datetime.now().isoformat()
+
+  weather_report:
+    - report_id: random.randint(1000, 9999)
+    - location: random.choice(['New York', 'London', 'Tokyo', 'Sydney', 'Paris'])
+    - temperature: round(random.uniform(-10.0, 40.0), 1)
+    - humidity: round(random.uniform(0, 100), 1)
+    - wind_speed: round(random.uniform(0, 50), 1)
+    - condition: random.choice(['Sunny', 'Cloudy', 'Rainy', 'Snowy', 'Windy'])
+    - description: 'self.generate_text("Weather Description: ", max_length=50)'
+    - timestamp: datetime.now().isoformat()
